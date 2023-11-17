@@ -9,8 +9,8 @@
 .PARAMETER cvssV3Severity
     Specifies the Common Vulnerability Scoring System (CVSS) v3 severity level for which to retrieve CVE information. This parameter is optional. The default value is 'CRITICAL'.
 .EXAMPLE
-    Get-NvdCve -applications "sitecore", "atlassian", "liferay", "telerik"
-    Retrieves Critical CVE information for sitecore, atlassian, liferay, and telerik.
+    $results = Get-NvdCveByApplication -applications "sitecore", "atlassian", "liferay", "telerik"
+    Retrieves Critical CVE information for sitecore, atlassian, liferay, and telerik then outputs the results in the $results object.
 .NOTES
     Uses the NVD REST API at the following URL to retrieve CVE information:
         https://services.nvd.nist.gov/rest/json/cves/2.0?virtualMatchString=cpe:2.3:*:*:*:*:*:*:en
@@ -40,6 +40,3 @@ function Get-NvdCveByApplication {
         if ($applications.count -gt 1) { Start-Sleep -Seconds 6 } # If retrieving CVE information for multiple applications, wait 6 seconds between each request to avoid overloading the NVD server
     }
 }
-
-Get-NvdCve -applications "sitecore", "atlassian", "liferay", "telerik"
-#Get-NvdCve -applications "sitecore", "liferay", "telerik"
